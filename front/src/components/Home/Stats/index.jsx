@@ -49,7 +49,7 @@ const Stats = ({ cryptos }) => {
             return <MdTrendingDown size={24}/>
         }
 
-        if (value > -5) {
+        if (value < -5) {
             return  <div>
                         <MdTrendingDown className="inline" size={24}/>
                         <MdTrendingDown className="inline" size={24}/>
@@ -66,6 +66,7 @@ const Stats = ({ cryptos }) => {
                            <img src={getLogoImage(crypt.name)} alt="crypto logo" className="w-6 inline mr-4 align-top"/>
                            <span className="font-bold font-roboto text-white text-xl">{crypt.symbol}</span> ({crypt.name})</p>
                            <div className="float-right text-white inline flex flex-col items-center">
+                                <p className="font-roboto text-xs text-grey">{crypt.quote.EUR.percent_change_24h.toFixed(2)}%</p>
                                {getTendance(crypt.quote.EUR.percent_change_24h)}
                                <p className="font-roboto text-xs text-grey">Sur 24h</p>
                             </div>

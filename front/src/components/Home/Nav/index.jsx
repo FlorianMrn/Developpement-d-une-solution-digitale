@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FaPen, FaPlus } from "react-icons/fa";
 import AddModal from "../Modal/AddModal";
+import SuprModal from "../Modal/SuprModal";
 
 const Nav = ({ cryptos }) => {
 
@@ -27,11 +28,12 @@ const Nav = ({ cryptos }) => {
     return (
         <section className={`${openAddModal && 'h-screen'}`}>
         {openAddModal && <AddModal handleOpenAddModal={handleOpenAddModal} filteredCryptosNames={filteredCryptosNames()}/>}
+        {openSuprModal && <SuprModal handleOpenSuprModal={handleOpenSuprModal} filteredCryptosNames={filteredCryptosNames()}/>}
         <nav className="bg-black w-full h-18 border-b-2 border-grey p-4">
                 <div className="w-full h-full flex justify-between items-center">
                     <h1 className="font-akzi text-white font-bold text-2xl">Crypto Tracker</h1>
                     <div>
-                        <button className="text-white mx-8"><FaPen size={20}/></button>
+                        <button onClick={handleOpenSuprModal} className="text-white mx-8"><FaPen size={20}/></button>
                         <button onClick={handleOpenAddModal} name="openAddModal" className="text-white mx-2"><FaPlus size={20}/></button>
                     </div>
                 </div>

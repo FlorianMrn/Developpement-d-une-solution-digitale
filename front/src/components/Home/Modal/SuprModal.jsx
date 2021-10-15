@@ -3,12 +3,11 @@ import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 
 
-const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
+const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
 
     const [value, setValue] = useState({
         select : "",
-        quantite : "",
-        prix: ""
+        quantite : ""
     });
 
     const allValuesDone = Object.keys(value).every((k) => value[k]);
@@ -29,20 +28,20 @@ const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
 
         e.preventDefault();
         console.log(value);
-
+        
+        toast.success(`La quantité de ${value.quantite} ${value.select} a bien été supprimée de votre portefeuille !`);
         setValue({
             select : "",
-            quantite : "",
-            prix: ""
+            quantite : ""
         });
-        toast.success("Votre transaction à bien été enregistrée !");
+
     };
 
 
     return (
         <section className="absolute top-0 right-100 bg-black z-50 w-full h-full overflow-hidden">
             <nav className="bg-black w-full h-18 border-b-2 border-grey p-4">
-                <button className="float-left text-white align-middle" onClick={handleOpenAddModal}><MdClose size={24}/></button>
+                <button className="float-left text-white align-middle" onClick={handleOpenSuprModal}><MdClose size={24}/></button>
                 <h2 className="text-center font-roboto text-white text-xl font-bold">Ajouter une transaction</h2>
             </nav>
             <form onSubmit={handleSubmit} className="w-full h-full flex flex-col items-center justify-start px-20 max-w-screen-md m-auto mt-16 relative">
@@ -55,8 +54,7 @@ const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
                     </select>
                 </div>
                 <input placeholder="Quantité" name="quantite" onChange={handleChange} className="font-roboto my-8 outline-none w-full h-12 bg-transparent text-white border border-white px-2 bg-coins" type="number" value={value.quantite} />
-                <input placeholder="Prix d'achat" name="prix" onChange={handleChange} className="font-roboto my-8 outline-none w-full h-12 bg-transparent text-white border border-white px-2 bg-euro" type="number" value={value.prix} />
-                <button onClick={handleSubmit}  disabled={!allValuesDone} className={`mt-40 bg-white w-full py-4 font-bold uppercase rounded outline-none ${allValuesDone ? '' : 'bg-opacity-60'}`}>Ajouter</button>
+                <button onClick={handleSubmit}  disabled={!allValuesDone} className={`mt-60 bg-white w-full py-4 font-bold uppercase rounded outline-none ${allValuesDone ? '' : 'bg-opacity-60'}`}>Valider</button>
             </form>
         </section>
     )
