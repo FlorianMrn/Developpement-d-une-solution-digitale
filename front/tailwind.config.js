@@ -18,16 +18,21 @@ module.exports = {
         }
       },
       fontFamily: {
-        roboto: "'Roboto'",
-        akzi: "'AkzidenzGroteskBQ'"
+        roboto: ['Roboto', 'sans-serif'],
+        akzi: ['AkzidenzGroteskBQ', 'sans-serif']
       },
       backgroundImage: {
         'particules': "url('./assets/images/particules.jpg')",
+        'coins' : "url('./assets/icons/coins-solid.svg')",
+        'search' : "url('./assets/icons/search.svg')",
+        'euro' : "url('./assets/icons/euro.svg')",
       },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+    },
   },
   plugins: [],
 }

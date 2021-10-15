@@ -1,6 +1,12 @@
+.Toastify__toast-theme--colored.Toastify__toast--success {
+  color: "#000"
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 @layer base {
     @font-face {
@@ -33,3 +39,4 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+

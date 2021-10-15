@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { getCryptosListings } from "../../../services/cryptos";
 import { MdTrendingUp, MdTrendingDown, MdTrendingFlat } from "react-icons/md";
 
 // Logos local
@@ -9,13 +7,7 @@ import bnb from '../../../assets/icons/bnb.svg';
 import ada from '../../../assets/icons/ada.svg';
 import usdt from '../../../assets/icons/usdt.svg';
 
-const Stats = () => {
-
-    const [cryptos, setCryptos] = useState([]);
-
-    useEffect(() => {
-        getCryptosListings().then((res) => setCryptos(res.data));
-    }, []);
+const Stats = ({ cryptos }) => {
 
     const getLogoImage = (name) => {
 
@@ -65,7 +57,6 @@ const Stats = () => {
         }
     };
 
-    console.log(cryptos)
     return (
         <main className="w-full h-full bg-black flex-1">
             <ul className="w-full h-full flex flex-col justify-center items-center px-12 relative max-w-screen-md m-auto">

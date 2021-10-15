@@ -2,13 +2,13 @@ import Nav from "./Nav";
 import Header from "./Header";
 import Stats from './Stats';
 
-const Home = () => {
+const Home = ({ cryptos }) => {
 
     return (
         <section className="flex flex-col h-screen">
-            <Nav />
+            <Nav cryptos={cryptos}/>
             <Header />
-            <Stats />
+            <Stats cryptos={cryptos}/>
         </section>
     )
    

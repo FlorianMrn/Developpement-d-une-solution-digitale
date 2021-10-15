@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaPen, FaPlus } from "react-icons/fa";
 import AddModal from "../Modal/AddModal";
 
-const Header = () => {
+const Nav = ({ cryptos }) => {
 
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openSuprModal, setOpenSuprModal] = useState(false);
@@ -15,9 +15,18 @@ const Header = () => {
         setOpenSuprModal(prevState => !prevState);
     };
 
+    const filteredCryptosNames = () => {
+
+        let names = [];
+
+        cryptos.map(c => names.push(c.name))
+
+        return names;
+    };
+
     return (
-        <>
-        {openAddModal && <AddModal handleOpenAddModal={handleOpenAddModal}/>}
+        <section className={`${openAddModal && 'h-screen'}`}>
+        {openAddModal && <AddModal handleOpenAddModal={handleOpenAddModal} filteredCryptosNames={filteredCryptosNames()}/>}
         <nav className="bg-black w-full h-18 border-b-2 border-grey p-4">
                 <div className="w-full h-full flex justify-between items-center">
                     <h1 className="font-akzi text-white font-bold text-2xl">Crypto Tracker</h1>
@@ -27,8 +36,8 @@ const Header = () => {
                     </div>
                 </div>
             </nav>
-        </>
+        </section>
     )
 };
 
-export default Header;
+export default Nav;
