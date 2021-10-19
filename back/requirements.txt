@@ -1,0 +1,13 @@
+django~=3.2.6
+djangorestframework~=3.12.4
+djangorestframework-simplejwt
+django-cors-headers
+django-environ
+faker~=8.12.1
+bcrypt
+drf-spectacular
+pandas
+gunicorn
+coverage
+environ~=1.0
+fpdf2
