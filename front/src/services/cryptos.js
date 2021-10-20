@@ -4,7 +4,7 @@ export async function getCryptosListings() {
 
     let config = {
         method: 'get',
-        url: 'http://localhost:8000/cryptos/listings/',
+        url: `${process.env.REACT_APP_API_URL}cryptos/listings/`,
         headers: { }
       };
       

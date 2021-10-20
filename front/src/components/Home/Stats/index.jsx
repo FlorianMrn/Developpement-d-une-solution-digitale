@@ -57,19 +57,22 @@ const Stats = ({ cryptos }) => {
         }
     };
 
+    console.log(cryptos)
+
     return (
         <main className="w-full h-full bg-black flex-1">
             <ul className="w-full h-full flex flex-col justify-center items-center px-12 relative max-w-screen-md m-auto">
-                {cryptos.map((crypt, index) => (
-                   <li key={index} className=" w-full border-b-2 border-grey py-4">
-                       <p className="text-left w-44 text-white inline font-roboto">
+                {cryptos && cryptos.map((crypt, index) => (
+                   <li key={index} className="w-full border-b-2 border-grey py-4 flex flex-row justify-between items-center">
+                       <p className="text-left w-auto text-white inline font-roboto align-top">
                            <img src={getLogoImage(crypt.name)} alt="crypto logo" className="w-6 inline mr-4 align-top"/>
-                           <span className="font-bold font-roboto text-white text-xl">{crypt.symbol}</span> ({crypt.name})</p>
-                           <div className="float-right text-white inline flex flex-col items-center">
-                                <p className="font-roboto text-xs text-grey">{crypt.quote.EUR.percent_change_24h.toFixed(2)}%</p>
-                               {getTendance(crypt.quote.EUR.percent_change_24h)}
-                               <p className="font-roboto text-xs text-grey">Sur 24h</p>
-                            </div>
+                           <span className="font-bold font-roboto text-white text-xl align-bottom">{crypt.symbol}</span> ({crypt.name})
+                        </p>
+                        <div className="float-right text-white inline flex flex-col items-center">
+                            <p className="font-roboto text-xs text-grey">{crypt.quote.EUR.percent_change_24h.toFixed(2)}%</p>
+                            {getTendance(crypt.quote.EUR.percent_change_24h)}
+                            <p className="font-roboto text-xs text-grey">Sur 24h</p>
+                        </div>
                     </li> 
                 ))}
             </ul>

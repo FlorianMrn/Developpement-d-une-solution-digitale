@@ -15,9 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from cryptos.views import CryptosView
+from historique.views import HistoriqueView
+
+router = routers.DefaultRouter()
+router.register(r'cryptos', CryptosView, 'cryptos')
+router.register(r'historique', HistoriqueView, 'cryptos')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
     path('cryptos/', include('cryptos.urls')),
+    path('api/', include(router.urls)),
 ]

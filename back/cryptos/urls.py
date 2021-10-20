@@ -1,4 +1,4 @@
-from .views import obtainCryptosListings
+from .views import obtainCryptosListings, CryptosView
 from django.urls import path
 
 urlpatterns = [
