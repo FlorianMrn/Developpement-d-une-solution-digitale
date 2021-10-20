@@ -1,12 +1,10 @@
 from django.shortcuts import render
-from requests import Request, Session
+from requests import Session
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from django.http import JsonResponse
 import os
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status, permissions, viewsets
+from rest_framework import viewsets
 from .serializers import CryptosSerializer
 from .models import Cryptos
 
