@@ -120,7 +120,7 @@ WSGI_APPLICATION = 'back.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'crypto_tracker',
         'USER': 'root',
         'PASSWORD': 'Lavoisine29@',

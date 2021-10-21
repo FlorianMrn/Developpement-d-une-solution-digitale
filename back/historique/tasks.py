@@ -1,4 +1,5 @@
 
 
 from authentication.models import CustomUser
-print(CustomUser.objects.all())
+query = CustomUser.objects.all()
+print(query)

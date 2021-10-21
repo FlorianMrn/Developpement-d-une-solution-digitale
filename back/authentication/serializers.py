@@ -12,7 +12,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
 
         # Add custom claims
-        token['portefeuille'] = user.portefeuille
+        token['portefeuille'] = str(user.portefeuille)
+        token['id'] = user.id
         return token
 
 

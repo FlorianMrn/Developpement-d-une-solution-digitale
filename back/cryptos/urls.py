@@ -3,4 +3,5 @@ from django.urls import path
 
 urlpatterns = [
     path('listings/', obtainCryptosListings, name="obtains_cryptos"),
+    path('save/', CryptosView.as_view(), name="save_cryptos"),
 ]

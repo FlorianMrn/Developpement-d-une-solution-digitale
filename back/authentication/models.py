@@ -8,7 +8,7 @@ from .managers import CustomUserManager
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
-    portefeuille = models.CharField(max_length=12, blank=False, unique=True, default=uuid.uuid4)
+    portefeuille = models.UUIDField(editable=False, default=uuid.uuid4)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -17,3 +17,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+    class Meta:
+        db_table = 'authentication_customuser'

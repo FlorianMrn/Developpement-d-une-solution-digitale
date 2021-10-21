@@ -5,4 +5,4 @@ from .models import Cryptos
 class CryptosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cryptos
-        fields = ('name', 'quantite', 'portefeuille')
+        fields = '__all__'

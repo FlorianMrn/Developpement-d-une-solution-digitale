@@ -20,7 +20,6 @@ from cryptos.views import CryptosView
 from historique.views import HistoriqueView
 
 router = routers.DefaultRouter()
-router.register(r'cryptos', CryptosView, 'cryptos')
 router.register(r'historique', HistoriqueView, 'cryptos')
 
 urlpatterns = [
