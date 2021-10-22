@@ -23,7 +23,6 @@ const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
             ...prevState,
             [name] : value
         }));
-        console.log(e.target)
 
     };
 
