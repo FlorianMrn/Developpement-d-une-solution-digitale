@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
+import { deleteCryptos } from "../../../services/cryptos";
 
 
 const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
@@ -20,21 +21,21 @@ const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
             ...prevState,
             [name] : value
         }));
-        console.log(e.target)
 
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
-        console.log(value);
-        
-        toast.success(`La quantité de ${value.quantite} ${value.select} a bien été supprimée de votre portefeuille !`);
+
+        const data = await deleteCryptos(value);
+
+        toast.success(data);
         setValue({
             select : "",
             quantite : ""
         });
-
+       
     };
 
 

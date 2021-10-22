@@ -28,7 +28,6 @@ const Stats = ({ cryptos }) => {
     };
 
     const getTendance = (value) => {
-        console.log(value)
 
         if (value > 1 && value < 5) {
             return <MdTrendingUp size={24}/>

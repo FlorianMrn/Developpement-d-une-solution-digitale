@@ -1,8 +1,22 @@
+import { useState, useEffect } from "react";
+import { getCryptosListings } from "../../services/cryptos";
 import Nav from "./Nav";
 import Header from "./Header";
 import Stats from './Stats';
 
-const Home = ({ cryptos }) => {
+const Home = ({ auth }) => {
+
+    const [cryptos, setCryptos] = useState([]);
+
+    useEffect(() => {
+
+        if (auth) {
+          getCryptosListings().then((res) => {
+            setCryptos(res.data)
+          });
+        }
+        
+    }, []);
 
     return (
         <section className="flex flex-col h-screen">

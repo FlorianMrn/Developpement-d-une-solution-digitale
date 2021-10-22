@@ -4,7 +4,7 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from django.http import JsonResponse
 import os
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .serializers import CryptosSerializer
 from rest_framework.views import APIView
 from cryptos.models import Cryptos
@@ -22,17 +22,18 @@ class CryptosView(APIView):
         id = request.data.get('id')
         name = request.data.get('name')
         quantite = request.data.get('quantite')
+        prix = request.data.get('prix')
         crypto = Cryptos.objects.filter(portefeuille=id, name=name).first()
 
         if crypto:
             crypto.quantite += quantite
             crypto.save()
-            return JsonResponse('Cryptos ajoutées', safe=False)
+            return JsonResponse('Cryptos ajoutées !', safe=False)
         if not crypto:
             portefeuille = CustomUser.objects.get(id=id)
-            crypto = Cryptos(name=name, quantite=quantite, portefeuille=portefeuille)
+            crypto = Cryptos(name=name, quantite=quantite, prix=prix, portefeuille=portefeuille)
             crypto.save()
-            return JsonResponse('Cryptos ajoutées', safe=False)
+            return JsonResponse('Cryptos ajoutées !', safe=False)
 
    def delete(self, request):
 
@@ -42,17 +43,19 @@ class CryptosView(APIView):
        crypto = Cryptos.objects.filter(portefeuille=id, name=name).first()
 
        if crypto:
-           positif = crypto.quantite - quantite
-           if positif >= 0:
+           positif = (crypto.quantite - quantite) >= 0
+           if positif:
                crypto.quantite -= quantite
                crypto.save()
                return JsonResponse('Cryptos supprimées', safe=False)
-           return JsonResponse('Pas de assez de cryptos dans le portefeuille', safe=False)
+           return JsonResponse('Pas de assez de cryptos dans le portefeuille.', safe=False)
        if not crypto:
-           return JsonResponse('Aucune crypto de ce type dans le portefeuille', safe=False)
+           return JsonResponse('Aucune crypto de ce type dans le portefeuille.', safe=False)
 
 
 def obtainCryptosListings(self):
+    permission_classes = [permissions.AllowAny]
+    authentication_classes = []
 
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
     parameters = {
@@ -71,6 +74,7 @@ def obtainCryptosListings(self):
     try:
         response = session.get(url, params=parameters)
         data = json.loads(response.text)
-        return JsonResponse(data)
+        return JsonResponse(data, safe=False)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
-        return JsonResponse(e)
+        print(e)
+        return JsonResponse(e, safe=False)

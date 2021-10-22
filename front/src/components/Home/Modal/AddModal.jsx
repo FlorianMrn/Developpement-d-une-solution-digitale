@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
+import { updateCryptos } from "../../../services/cryptos";
 
 
 const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
@@ -25,17 +26,18 @@ const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
 
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
-        console.log(value);
 
+        const data = await updateCryptos(value);
+
+        toast.success(data);
         setValue({
             select : "",
             quantite : "",
-            prix: ""
+            prix : ""
         });
-        toast.success("Votre transaction à bien été enregistrée !");
     };
 
 
