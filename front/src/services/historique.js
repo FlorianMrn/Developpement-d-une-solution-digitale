@@ -2,24 +2,7 @@ import axios from 'axios';
 import { axiosInstance } from './instance';
 import jwtDecode from "jwt-decode";
 
-export async function getCryptosListings() {
-
-    let config = {
-        method: 'get',
-        url: `${process.env.REACT_APP_API_URL}cryptos/listings/`,
-        headers: {}
-    };
-      
-      
-    try {
-        const response = await axios(config);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-export async function deleteCryptos(data) {
+export async function historiqueFollowAdd(data) {
 
     const token = localStorage.getItem("access_token");
     const { id } = jwtDecode(token);
@@ -27,12 +10,13 @@ export async function deleteCryptos(data) {
     let datas = {
         "id": id,
         "name": data.select,
-        "quantite": parseInt(data.quantite)
-      };
+        "quantite": parseInt(data.quantite),
+        "prix" : parseInt(data.prix)
+    };
       
       let config = {
-        method: 'delete',
-        url: `${process.env.REACT_APP_API_URL}cryptos/change/`,
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}historique/followadd/`,
         headers: { 
           'Authorization': `Bearer ${token}`, 
           'Content-Type': 'application/json'
@@ -52,21 +36,21 @@ export async function deleteCryptos(data) {
     
 };
 
-export async function updateCryptos(data) {
+export async function historiqueFollowSuppr(data) {
 
     const token = localStorage.getItem("access_token");
     const { id } = jwtDecode(token);
 
     let datas = {
-      "id": id,
-      "name": data.select,
-      "quantite": parseInt(data.quantite),
-      "prix" : parseInt(data.prix)
+        "id": id,
+        "name": data.name,
+        "quantite": parseInt(data.quantite),
+        "prix" : parseInt(data.prix)
     };
       
       let config = {
-        method: 'put',
-        url: `${process.env.REACT_APP_API_URL}cryptos/change/`,
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}historique/followsuppr/`,
         headers: { 
           'Authorization': `Bearer ${token}`, 
           'Content-Type': 'application/json'
@@ -80,6 +64,8 @@ export async function updateCryptos(data) {
       } catch(error) {
         console.log(error);
       }
+
+    
 
     
 };

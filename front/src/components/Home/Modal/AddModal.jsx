@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 import { updateCryptos } from "../../../services/cryptos";
+import { historiqueFollowAdd } from "../../../services/historique";
 
 
 const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
@@ -31,6 +32,7 @@ const AddModal = ({ handleOpenAddModal, filteredCryptosNames }) => {
         e.preventDefault();
 
         const data = await updateCryptos(value);
+        historiqueFollowAdd(value);
 
         toast.success(data);
         setValue({

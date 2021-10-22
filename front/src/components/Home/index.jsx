@@ -12,6 +12,7 @@ const Home = ({ auth }) => {
 
         if (auth) {
           getCryptosListings().then((res) => {
+            console.log(res.data)
             setCryptos(res.data)
           });
         }

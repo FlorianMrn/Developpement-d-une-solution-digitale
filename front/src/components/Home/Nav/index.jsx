@@ -25,10 +25,20 @@ const Nav = ({ cryptos }) => {
         return names;
     };
 
+    const filteredCryptosPriceAndNames = () => {
+        let namesAndPrices = [];
+
+        cryptos.map((c) => {
+             return namesAndPrices.push({name : c['name'], price : c.quote.EUR.price}) 
+        });
+
+        return namesAndPrices;
+    };
+
     return (
         <section className={`${openAddModal && 'h-screen'}`}>
-        {openAddModal && <AddModal handleOpenAddModal={handleOpenAddModal} filteredCryptosNames={filteredCryptosNames()}/>}
-        {openSuprModal && <SuprModal handleOpenSuprModal={handleOpenSuprModal} filteredCryptosNames={filteredCryptosNames()}/>}
+        {openAddModal && <AddModal handleOpenAddModal={handleOpenAddModal} filteredCryptosNames={filteredCryptosNames()} />}
+        {openSuprModal && <SuprModal handleOpenSuprModal={handleOpenSuprModal} filteredCryptosNames={filteredCryptosNames()} filteredCryptosPriceAndNames={filteredCryptosPriceAndNames()}/>}
         <nav className="bg-black w-full h-18 border-b-2 border-grey p-4">
                 <div className="w-full h-full flex justify-between items-center">
                     <h1 className="font-akzi text-white font-bold text-2xl">Crypto Tracker</h1>

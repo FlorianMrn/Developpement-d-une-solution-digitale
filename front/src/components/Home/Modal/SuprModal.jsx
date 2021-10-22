@@ -2,14 +2,16 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
 import { deleteCryptos } from "../../../services/cryptos";
+import { historiqueFollowSuppr } from "../../../services/historique";
 
 
-const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
+const SuprModal = ({ handleOpenSuprModal, filteredCryptosNames, filteredCryptosPriceAndNames }) => {
 
     const [value, setValue] = useState({
         select : "",
-        quantite : ""
+        quantite : "",
     });
+    const [price, setPrice] = useState("");
 
     const allValuesDone = Object.keys(value).every((k) => value[k]);
 
@@ -22,6 +24,18 @@ const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
             [name] : value
         }));
 
+
+        // Recherche du prix par rapport au choix utilisateur pour l'enregistrement de l'historique
+        for (let i = 0; i < filteredCryptosPriceAndNames.length; i++) {
+
+            if (filteredCryptosPriceAndNames[i].name === value) {
+
+                setPrice(filteredCryptosPriceAndNames[i].price)
+            } else {
+                return;
+            }
+        }
+
     };
 
     const handleSubmit = async (e) => {
@@ -30,14 +44,26 @@ const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
 
         const data = await deleteCryptos(value);
 
-        toast.success(data);
+        toast.success(data.message);
+
+
+        if (data.follow) {
+
+            const newDatas = {
+                name : value.select,
+                quantite : value.quantite,
+                prix : price
+            }
+
+            historiqueFollowSuppr(newDatas)
+        }
+
         setValue({
             select : "",
             quantite : ""
         });
        
     };
-
 
     return (
         <section className="absolute top-0 right-100 bg-black z-50 w-full h-full overflow-hidden">
@@ -61,4 +87,4 @@ const AddModal = ({ handleOpenSuprModal, filteredCryptosNames }) => {
     )
 };
 
-export default AddModal;
+export default SuprModal;

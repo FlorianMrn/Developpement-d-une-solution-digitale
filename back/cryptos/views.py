@@ -4,14 +4,10 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 from django.http import JsonResponse
 import os
-from rest_framework import viewsets, permissions
-from .serializers import CryptosSerializer
+from rest_framework import permissions
 from rest_framework.views import APIView
 from cryptos.models import Cryptos
 from authentication.models import CustomUser
-from rest_framework import status
-from authentication.serializers import CustomUserSerializer
-from rest_framework.response import Response
 import json
 
 
@@ -47,10 +43,10 @@ class CryptosView(APIView):
            if positif:
                crypto.quantite -= quantite
                crypto.save()
-               return JsonResponse('Cryptos supprimées', safe=False)
-           return JsonResponse('Pas de assez de cryptos dans le portefeuille.', safe=False)
+               return JsonResponse({'message': 'Cryptos supprimées', 'follow': True}, safe=False)
+           return JsonResponse({ 'message': 'Pas de assez de cryptos dans le portefeuille.', 'follow': False}, safe=False)
        if not crypto:
-           return JsonResponse('Aucune crypto de ce type dans le portefeuille.', safe=False)
+           return JsonResponse({'message': 'Aucune crypto de ce type dans le portefeuille.', 'follow': False}, safe=False)
 
 
 def obtainCryptosListings(self):
