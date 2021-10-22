@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from .serializers import HistoriqueSerializer
 from .models import Historique
 from django.http import JsonResponse
-from rest_framework import viewsets
 from rest_framework.views import APIView
 from cryptos.models import Cryptos
 from authentication.models import CustomUser
+from django.core import serializers
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -39,7 +38,7 @@ class HistoriqueFollowSupprView(APIView):
         prix = crypto.prix
         portefeuille = CustomUser.objects.get(id=id)
 
-        last_histo = Historique.objects.filter(portefeuille=id).order_by('-date')
+        last_histo = Historique.objects.filter(portefeuille=id).order_by('-date').first()
         value = last_histo.value - (quantite * prix)
         historique = Historique(value=value, portefeuille=portefeuille)
         historique.save()
@@ -48,10 +47,8 @@ class HistoriqueFollowSupprView(APIView):
 class HistoriqueObtainView(APIView):
     def get(self, request):
         id = request.data.get('id')
-        last_histo = Historique.objects.filter(portefeuille=id).order_by('-date').first()
-        if last_histo:
-            historique = Historique.objects.filter(portefeuille=id).order_by('-date').values()
-            return JsonResponse({"historique" : list(historique)}, safe=False)
-        if not last_histo:
-            return JsonResponse("Pas d'historique !", safe=False)
+        print("allo", id)
+        historique = Historique.objects.filter(portefeuille=id).order_by('-date')
+        response = serializers.serialize("json", historique)
+        return HttpResponse(response, content_type='application/json')
 

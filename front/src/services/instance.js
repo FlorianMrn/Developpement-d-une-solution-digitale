@@ -12,52 +12,29 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-        console.log("wehs", error.response.status)
-      if (error.response) {
+  response => response,
+  error => {
+    const originalRequest = error.config;
+    
+    if (error.response.status === 401 && error.response.statusText === "Unauthorized") {
+        const refresh_token = localStorage.getItem('refresh_token');
 
-        if (error.response.status === 401) {
+        return axiosInstance
+            .post('api/token/refresh/', {refresh: refresh_token})
+            .then((response) => {
 
-            const originalRequest = error.config;
-            const refresh_token = localStorage.getItem('refresh_token');
-
-            let data = qs.stringify({
-                'refresh': refresh_token 
-              });
-              let config = {
-                method: 'post',
-                url: 'http://localhost:8000/api/token/refresh/',
-                headers: { 
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                data : data
-              };
-              
-              axios(config)
-              .then((response) => {
                 localStorage.setItem('access_token', response.data.access);
                 localStorage.setItem('refresh_token', response.data.refresh);
 
-                axiosInstance.defaults.headers['Authorization'] = "Bearer " + response.data.access;
-                originalRequest.headers['Authorization'] = "Bearer " + response.data.access;
+                axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
+                originalRequest.headers['Authorization'] = "JWT " + response.data.access;
 
                 return axiosInstance(originalRequest);
-              })
-              .catch((error) => {
-                return Promise.reject(error);
-              });
-
-        }
-  
-        if (error.response.status !== 401) {
-
-          return Promise.reject(error.response.data);
-        }
-      }
-  
-      return Promise.reject(error);
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
+    return Promise.reject(error);
+}
 );

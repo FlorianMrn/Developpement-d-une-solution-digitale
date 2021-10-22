@@ -56,7 +56,6 @@ const Stats = ({ cryptos }) => {
         }
     };
 
-    console.log(cryptos)
 
     return (
         <main className="w-full h-full bg-black flex-1">

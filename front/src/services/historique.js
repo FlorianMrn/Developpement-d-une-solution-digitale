@@ -2,6 +2,35 @@ import axios from 'axios';
 import { axiosInstance } from './instance';
 import jwtDecode from "jwt-decode";
 
+export async function getHistorique() {
+
+  const token = localStorage.getItem("access_token");
+  const { id } = jwtDecode(token);
+
+  let datas = {
+    "id": id
+  };
+    
+  let config = {
+    method: 'get',
+    url: `${process.env.REACT_APP_API_URL}historique/obtain/`,
+    headers: { 
+      'Authorization': `Bearer ${token}`, 
+      'Content-Type': 'application/json'
+    },
+    data : datas
+  };
+  
+  try {
+    const response = await axiosInstance(config);
+    console.log("le retour", response);
+  } catch(error) {
+    console.log(error);
+  }
+  
+
+};
+
 export async function historiqueFollowAdd(data) {
 
     const token = localStorage.getItem("access_token");
@@ -31,9 +60,6 @@ export async function historiqueFollowAdd(data) {
         console.log(error);
       }
 
-    
-
-    
 };
 
 export async function historiqueFollowSuppr(data) {
@@ -64,8 +90,5 @@ export async function historiqueFollowSuppr(data) {
       } catch(error) {
         console.log(error);
       }
-
-    
-
     
 };
