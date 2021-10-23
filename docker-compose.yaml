@@ -7,18 +7,20 @@ services:
       - "6379:6379"
     networks:
       - db-net
+    extra_hosts:
+    - "host.docker.internal:172.17.0.1"
 
   db:
     restart: always
-    image: mariadb:5.5
+    image: mysql:5.7
     environment:
       - MYSQL_HOST=localhost
-      - MYSQL_PORT=crypto_tracker
+      - MYSQL_PORT=3306
       - MYSQL_ROOT_HOST=%
-      - MYSQL_DATABASE=bug
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=Lavoisine29@
-      - MYSQL_ROOT_PASSWORD=Lavoisine29@
+      - MYSQL_DATABASE=DB_NAME
+      - MYSQL_USER=DB_USER
+      - MYSQL_PASSWORD=DB_PASSWORD
+      - MYSQL_ROOT_PASSWORD=DB_PASSWORD
     ports:
       - "3302:3306"
     networks:
@@ -26,12 +28,12 @@ services:
 
   back:
     restart: always
-    container_name: code
+    container_name: back
     command : bash -c "python check_db.py --service-name db --ip db --port 3306 && 
                       python manage.py migrate &&
                       python manage.py runserver 0.0.0.0:8000"
     env_file:
-      - ./back/settings.ini
+      - ./back/.env
     build:
       context: ./back/
       dockerfile: Dockerfile
@@ -47,6 +49,8 @@ services:
     restart: always
     command : npm start
     container_name: front
+    env_file:
+      - ./front/.env
     build:
       context: ./front/
       dockerfile: Dockerfile

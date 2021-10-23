@@ -23,6 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
+DB_PASSWORD = str(os.getenv('DB_PASSWORD'))
+DB_USER = str(os.getenv('DB_USER'))
+DB_NAME = str(os.getenv('DB_NAME'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -121,10 +124,10 @@ WSGI_APPLICATION = 'back.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'crypto_tracker',
-        'USER': 'root',
-        'PASSWORD': 'Lavoisine29@',
-        'HOST': '127.0.0.1',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': 'db',
         'PORT': '3306',
         'TEST_CHARSET': "utf8",
         'TEST_COLLATION': "utf8_general_ci",   
