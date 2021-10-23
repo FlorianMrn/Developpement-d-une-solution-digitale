@@ -47,7 +47,6 @@ class HistoriqueFollowSupprView(APIView):
 class HistoriqueObtainView(APIView):
     def get(self, request):
         id = request.data.get('id')
-        print("allo", id)
         historique = Historique.objects.filter(portefeuille=id).order_by('-date')
         response = serializers.serialize("json", historique)
         return HttpResponse(response, content_type='application/json')

@@ -72,5 +72,4 @@ def obtainCryptosListings(self):
         data = json.loads(response.text)
         return JsonResponse(data, safe=False)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
-        print(e)
         return JsonResponse(e, safe=False)

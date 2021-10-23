@@ -12,6 +12,7 @@ requests = "*"
 python-dotenv = "*"
 celery = "*"
 pymysql = "*"
+django-heroku = "*"
 
 [dev-packages]
 
