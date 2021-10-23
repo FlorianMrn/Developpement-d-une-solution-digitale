@@ -13,12 +13,12 @@ services:
     image: mariadb:5.5
     environment:
       - MYSQL_HOST=localhost
-      - MYSQL_PORT=3306
+      - MYSQL_PORT=crypto_tracker
       - MYSQL_ROOT_HOST=%
       - MYSQL_DATABASE=bug
-      - MYSQL_USER=<<username>>
-      - MYSQL_PASSWORD=<<password>>
-      - MYSQL_ROOT_PASSWORD=<<rootpassword>>
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Lavoisine29@
+      - MYSQL_ROOT_PASSWORD=Lavoisine29@
     ports:
       - "3302:3306"
     networks:
