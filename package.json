@@ -1,7 +1,6 @@
 {
   "name": "front",
   "version": "0.1.0",
-  "proxy": "http://localhost:8000",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.3.0",
@@ -25,6 +24,10 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "17.0.1",
+    "npm": "8.1.1"
   },
   "eslintConfig": {
     "extends": [
