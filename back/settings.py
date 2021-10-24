@@ -139,7 +139,10 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD,
         'HOST': 'ec2-52-214-178-113.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
-    }
+    },
+    'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1;",
+}
 }
 
 
