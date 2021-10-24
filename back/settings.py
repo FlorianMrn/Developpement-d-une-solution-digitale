@@ -137,10 +137,8 @@ DATABASES = {
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
-        'HOST': 'db',
-        'PORT': '3306',
-        'TEST_CHARSET': "utf8",
-        'TEST_COLLATION': "utf8_general_ci",   
+        'HOST': 'ec2-52-214-178-113.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
