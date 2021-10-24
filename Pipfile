@@ -13,6 +13,7 @@ python-dotenv = "*"
 celery = "*"
 pymysql = "*"
 django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 

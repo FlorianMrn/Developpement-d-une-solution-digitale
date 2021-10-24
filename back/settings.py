@@ -31,7 +31,7 @@ DB_NAME = str(os.getenv('DB_NAME'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cryptotrackerstudi.herokuapp.com']
+ALLOWED_HOSTS = ['https://cryptotrackerstudi.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
