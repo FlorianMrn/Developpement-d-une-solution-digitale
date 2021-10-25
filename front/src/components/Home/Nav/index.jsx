@@ -1,12 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaPen, FaPlus } from "react-icons/fa";
 import AddModal from "../Modal/AddModal";
 import SuprModal from "../Modal/SuprModal";
+import { getCryptosListings } from "../../../services/cryptos";
 
-const Nav = ({ cryptos }) => {
+
+const Nav = () => {
 
     const [openAddModal, setOpenAddModal] = useState(false);
     const [openSuprModal, setOpenSuprModal] = useState(false);
+    const [cryptos, setCryptos]= useState([]);
+
+    useEffect(async () => {
+
+        const result = await getCryptosListings()
+
+        setCryptos(result ? result.data : []);
+
+    
+    }, []);
 
     const handleOpenAddModal = () => {
         setOpenAddModal(prevState => !prevState);
