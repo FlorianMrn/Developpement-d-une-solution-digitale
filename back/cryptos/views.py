@@ -53,7 +53,7 @@ def obtainCryptosListings(self):
     permission_classes = [permissions.AllowAny]
     authentication_classes = []
 
-    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+    url = 'http://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
     parameters = {
     'start':'1',
     'limit':'5',

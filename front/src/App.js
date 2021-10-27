@@ -5,6 +5,9 @@ import Home from "./components/Home";
 import Login from './components/Login';
 import { getIsAuthenticated } from './services/auth';
 import PrivateRoute from './services/PrivateRoute';
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
 
 function App() {
 
@@ -12,16 +15,18 @@ function App() {
 
   return (
     <div className="App">
-      <Switch>
-        <PrivateRoute 
-          exact={true}
-          path="/"
-          component={Home}
-          auth={auth}
-        />
-        <Route exact path="/login" component={Login} />
-        {!auth ? <Redirect to="/login"/> : <Redirect to="/"/> }
-      </Switch>
+      <Router>
+        <Switch>
+          <PrivateRoute 
+            exact={true}
+            path="/"
+            component={Home}
+            auth={auth}
+          />
+          <Route exact path="/login" component={Login} />
+          {!auth ? <Redirect to="/login"/> : <Redirect to="/"/> }
+        </Switch>
+      </Router>
       <ToastContainer
         position="bottom-center"
         autoClose={5000}

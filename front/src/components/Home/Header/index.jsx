@@ -9,8 +9,9 @@ const Header = ({openAddModal, openSuprModal}) => {
 
     const getHisto = async () => {
         
-        const response  = await getHistorique();
-        setHistoriques(response.data);
+        getHistorique().then((response) => setHistoriques(response.data))
+        // const response  = await getHistorique();
+        // setHistoriques(response.data);
     };
 
     useEffect(() => {
