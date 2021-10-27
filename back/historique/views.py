@@ -45,9 +45,8 @@ class HistoriqueFollowSupprView(APIView):
         return JsonResponse('Historique ajouté !', safe=False)
 
 class HistoriqueObtainView(APIView):
-    def get(self, request):
+    def post(self, request):
         id = request.data.get('id')
-        historique = Historique.objects.filter(portefeuille=id).order_by('-date')
-        response = serializers.serialize("json", historique)
-        return HttpResponse(response, content_type='application/json')
+        historique = Historique.objects.filter(portefeuille=id).order_by('-date').values()
+        return JsonResponse({"data" : list(historique)}, safe=False)
 

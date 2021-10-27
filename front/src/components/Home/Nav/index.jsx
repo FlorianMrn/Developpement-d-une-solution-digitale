@@ -5,18 +5,18 @@ import SuprModal from "../Modal/SuprModal";
 import { getCryptosListings } from "../../../services/cryptos";
 
 
-const Nav = () => {
+const Nav = ({ openAddModal, setOpenAddModal, openSuprModal, setOpenSuprModal }) => {
 
-    const [openAddModal, setOpenAddModal] = useState(false);
-    const [openSuprModal, setOpenSuprModal] = useState(false);
     const [cryptos, setCryptos]= useState([]);
 
-    useEffect(async () => {
+    useEffect( () => {
 
-        const result = await getCryptosListings()
+        const setter = async () => {
+            const result = await getCryptosListings();
+            setCryptos(result ? result.data : []);
+        };
 
-        setCryptos(result ? result.data : []);
-
+        setter();
     
     }, []);
 

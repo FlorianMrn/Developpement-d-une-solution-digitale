@@ -1,29 +1,30 @@
-import axios from 'axios';
 import { axiosInstance } from './instance';
 import jwtDecode from "jwt-decode";
+import qs from "qs";
 
 export async function getHistorique() {
 
   const token = localStorage.getItem("access_token");
   const { id } = jwtDecode(token);
+  const num = id.toString();
 
-  let datas = {
-    "id": id
-  };
+  let datas = qs.stringify({
+    "id": num
+  });
     
   let config = {
-    method: 'get',
+    method: 'post',
     url: `${process.env.REACT_APP_API_URL}historique/obtain/`,
     headers: { 
-      'Authorization': `Bearer ${token}`, 
-      'Content-Type': 'application/json'
+      'Authorization': `Token ${token}`, 
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
     data : datas
   };
   
   try {
     const response = await axiosInstance(config);
-    console.log("le retour", response);
+    return response.data;
   } catch(error) {
     console.log(error);
   }

@@ -61,7 +61,7 @@ def obtainCryptosListings(self):
     }
     headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': str(os.getenv('API_CRYPTOS_KEY')),
+    'X-CMC_PRO_API_KEY': str('1494f20f-9d06-4974-a2b8-f3618a8c6a51'),
     }
 
     session = Session()

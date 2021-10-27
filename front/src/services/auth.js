@@ -1,7 +1,5 @@
 import { axiosInstance } from "./instance";
 import jwtDecode from "jwt-decode";
-import axios from "axios";
-import qs from 'qs'
 
 export function logout() {
     try {

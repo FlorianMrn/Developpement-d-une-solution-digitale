@@ -1,4 +1,6 @@
 import { MdTrendingUp, MdTrendingDown, MdTrendingFlat } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { getCryptosListings } from "../../../services/cryptos";
 
 // Logos local
 import btc from '../../../assets/icons/btc.svg';
@@ -7,7 +9,21 @@ import bnb from '../../../assets/icons/bnb.svg';
 import ada from '../../../assets/icons/ada.svg';
 import usdt from '../../../assets/icons/usdt.svg';
 
-const Stats = ({ cryptos }) => {
+const Stats = () => {
+
+    const [cryptos, setCryptos]= useState([]);
+
+    useEffect(() => {
+
+        const setter = async () => {
+
+            const result = await getCryptosListings()
+            setCryptos(result ? result.data : []);
+        };
+
+        setter();
+        
+    }, []);
 
     const getLogoImage = (name) => {
 

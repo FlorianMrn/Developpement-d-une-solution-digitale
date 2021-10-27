@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 
 export async function getCryptosListings() {
 
+
     let config = {
         method: 'get',
         url: `${process.env.REACT_APP_API_URL}cryptos/listings/`,

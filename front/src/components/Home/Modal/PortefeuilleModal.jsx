@@ -8,12 +8,12 @@ const PortefeuilleModal = ({ handleOpenModal, historique }) => {
         const dates = [];
 
         historique.map((h) => {
-            const dateTrunced = h.fields.date.slice(0, 10);
-            const hourTrunced = h.fields.date.slice(11, 16);
+            const dateTrunced = h.date.slice(0, 10);
+            const hourTrunced = h.date.slice(11, 16);
             const dateOrdered = dateTrunced.split("-").reverse().join("/");
             const hourOrdered = hourTrunced.split(":").join("h");
 
-            dates.push(`le ${dateOrdered} à ${hourOrdered}`)
+            return dates.push(`le ${dateOrdered} à ${hourOrdered}`)
         })
 
         // Du plus ancien au plus récent
@@ -25,7 +25,7 @@ const PortefeuilleModal = ({ handleOpenModal, historique }) => {
         const values = [];
 
         historique.map((h) => {
-            values.push(h.fields.value);
+            return values.push(h.value);
         });
 
         // Du plus ancien au plus récent
